@@ -222,6 +222,24 @@ with st.form("Feedback"):
         all_df.to_csv(feedback_path, index=False)
         st.success("✅ Thanks for your feedback!")
 
+        # -------------------------
+# 📊 Visual Tracker of All Users (only visible to you)
+# -------------------------
+if st.session_state.user == "redcodeops@gmail.com":
+    if os.path.exists("users/expensify_users.csv"):
+        st.markdown("<hr><h4>📊 User Login Activity</h4>", unsafe_allow_html=True)
+        log_df = pd.read_csv("users/expensify_users.csv")
+        
+        st.dataframe(log_df, use_container_width=True)
+        st.metric("🧑‍💻 Total Users", log_df['Email'].nunique())
+        
+        daily_logins = log_df.groupby("Login Time")["Email"].count().reset_index()
+        daily_logins.columns = ["Time", "Logins"]
+        
+        st.subheader("🕒 Login Timeline")
+        st.line_chart(daily_logins.set_index("Time"))
+
+
 # -------------------------
 # Logout
 # -------------------------
