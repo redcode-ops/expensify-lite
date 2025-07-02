@@ -62,7 +62,7 @@ if "logged_in" not in st.session_state:
 if not st.session_state.logged_in:
     st.markdown("""<h2 style='text-align:center;'>Welcome to <span style='color:#27ae60;'>Expensify Lite</span></h2>""", unsafe_allow_html=True)
 
-    tabs = st.tabs(["🔑 Login", "📝 Sign Up"])
+    tabs = st.tabs(["🔐 Login", "📝 Sign Up"])
 
     with tabs[0]:
         email = st.text_input("Email", key="login_email").strip()
@@ -231,7 +231,3 @@ if st.sidebar.button("Logout"):
     st.session_state.user = None
     st.session_state.expenses = []
     st.rerun()
-           
-
-  
-    
